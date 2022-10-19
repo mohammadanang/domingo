@@ -1,5 +1,5 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Todo = require('./todo');
 
@@ -17,12 +17,12 @@ const DB_URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_N
 
 app.use(express.json());
 
-app.get("/todo", async (_req, res) => {
+app.get('/todo', async (_req, res) => {
   const allTodos = await Todo.find();
   return res.status(200).json(allTodos);
 });
 
-app.post("/todo", async (req, res) => {
+app.post('/todo', async (req, res) => {
   const newTodo = new Todo({ ...req.body });
   const created = await newTodo.save();
   return res.status(201).json(created);
@@ -31,7 +31,7 @@ app.post("/todo", async (req, res) => {
 const start = async () => {
   try {
     await mongoose.connect(DB_URI);
-    app.listen(PORT, () => console.log("Server started on port 3000"));
+    app.listen(PORT, () => console.log('Server started on port 3000'));
   } catch (error) {
     console.error(error);
     process.exit(1);
